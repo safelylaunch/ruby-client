@@ -4,12 +4,11 @@ module Safelylaunch
 
     def initialize(connection)
       @connection = connection
-      @faraday_connection = connection.call
     end
 
     def enable?(toggle_key)
-      response = faraday_connection.get('/api/v1/check', token: @connection.api_token, key: toggle_key)
-      response.body[:enable]
+      response = connection.get(toggle_key)
+      response[:enable]
     end
   end
 end

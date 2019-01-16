@@ -53,7 +53,7 @@ You can use mock connection for easy testing. It will store all defined toggles 
 connection = Safelylaunch::MockConnection.new(
   toggles: {
     'toggle-key' => true,
-    'disable-toggle-key' => falise,
+    'disable-toggle-key' => false,
   }
   logger: Logger.new # optional, default Logger.new
 )
