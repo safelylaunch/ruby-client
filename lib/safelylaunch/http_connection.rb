@@ -11,6 +11,8 @@ module Safelylaunch
       @logger = logger
       @host = host
 
+      @cache = HttpCache.new
+
       @connection = Faraday.new(url: host, request: { timeout: 10 }) do |conn|
         conn.response :json, content_type: %r{application/json}, parser_options: { symbolize_names: true }
         conn.response :logger, logger
@@ -20,8 +22,16 @@ module Safelylaunch
     end
 
     def get(key)
-      response = connection.get('/api/v1/check', token: api_token, key: key)
-      response.body
+      cached_data = @cache.get(key)
+      
+      if cached_data
+        cached_data
+      else
+        response = connection.get('/api/v1/check', token: api_token, key: key)
+        result = response.body
+        @cache.put(key, result, 10)
+        result
+      end
     end
   end
 end
