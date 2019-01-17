@@ -36,7 +36,7 @@ connection = Safelylaunch::HttpConnection.new(
   logger: Logger.new # optional, default Logger.new
 )
 
-client = Safelylaunch.new(connection)
+client = Safelylaunch::Client.new(connection)
 ```
 
 ### Usage
@@ -58,7 +58,7 @@ connection = Safelylaunch::MockConnection.new(
   logger: Logger.new # optional, default Logger.new
 )
 
-client = Safelylaunch.new(connection)
+client = Safelylaunch::Client.new(connection)
 client.enable?('toggle-key') # => true
 client.enable?('disable-toggle-key') # => false
 ```
