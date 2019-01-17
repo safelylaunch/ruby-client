@@ -33,7 +33,8 @@ After that you need to create connection object and use it as a client instance 
 connection = Safelylaunch::HttpConnection.new(
   api_token: 'your env token', # required
   host: 'your project instance host', # optional, default 'TODO'
-  logger: Logger.new # optional, default Logger.new
+  logger: Logger.new, # optional, default Logger.new
+  cache_time: 10 # optional, how long cache requests in seconds. If `nil` will disable cache. Default `nil`
 )
 
 client = Safelylaunch::Client.new(connection)
