@@ -4,12 +4,15 @@ require 'faraday_middleware'
 
 module Safelylaunch
   class HttpConnection
-    attr_reader :api_token, :logger, :host, :connection
+    attr_reader :api_token, :logger, :host, :connection, :cache_time
 
-    def initialize(api_token:, logger: Logger.new(STDOUT), host: 'http://localhost:2300')
+    DEFAULT_CACHED_TIME = 10 # in seconds
+
+    def initialize(api_token:, logger: Logger.new(STDOUT), cache_time: DEFAULT_CACHED_TIME, host: 'http://localhost:2300')
       @api_token = api_token
       @logger = logger
       @host = host
+      @cache_time = cache_time
 
       @cache = HttpCache.new
 
@@ -29,7 +32,7 @@ module Safelylaunch
       else
         response = connection.get('/api/v1/check', token: api_token, key: key)
         result = response.body
-        @cache.put(key, result, 10)
+        @cache.put(key, result, cache_time)
         result
       end
     end
