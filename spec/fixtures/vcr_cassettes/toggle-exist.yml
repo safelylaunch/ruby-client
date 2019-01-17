@@ -1,0 +1,42 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://localhost:2300/api/v1/check?key=stream-toggle&token=970144d3-fa42-42ca-93d3-b911e0282c14
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.15.4
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Frame-Options:
+      - DENY
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Content-Security-Policy:
+      - 'form-action ''self''; frame-ancestors ''self''; base-uri ''self''; default-src
+        ''none''; script-src ''self''; connect-src ''self''; img-src ''self'' https:
+        data:; style-src ''self'' ''unsafe-inline'' https:; font-src ''self''; object-src
+        ''none''; plugin-types application/pdf; child-src ''self''; frame-src ''self'';
+        media-src ''self'''
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '37'
+    body:
+      encoding: UTF-8
+      string: '{"key":"stream-toggle","enable":true}'
+    http_version: 
+  recorded_at: Thu, 17 Jan 2019 10:39:34 GMT
+recorded_with: VCR 4.0.0
