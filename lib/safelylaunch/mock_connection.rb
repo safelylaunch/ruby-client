@@ -1,13 +1,15 @@
 module Safelylaunch
   class MockConnection
-    attr_reader :api_token, :logger, :host, :connection
+    attr_reader :api_token, :logger, :host
 
-    def initialize(api_token:, toggles: {}, logger: Logger.new(STDOUT), host: 'http://localhost:2300')
+    DEFAILT_HOST = 'http://localhost:2300'
+
+    def initialize(api_token:, **params)
       @api_token = api_token
-      @logger = logger
-      @host = host
-      @connection = nil
-      @toggles = toggles
+      @logger = params[:logger] || Logger.new(STDOUT)
+      @host = params[:host] || DEFAILT_HOST
+
+      @toggles = params.fetch(:toggles, {})
     end
 
     def get(key)
