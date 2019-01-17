@@ -6,9 +6,7 @@ module Safelylaunch
   class HttpConnection
     attr_reader :api_token, :logger, :host, :connection, :cache_time
 
-    DEFAULT_CACHED_TIME = 10 # in seconds
-
-    def initialize(api_token:, logger: Logger.new(STDOUT), cache_time: DEFAULT_CACHED_TIME, host: 'http://localhost:2300')
+    def initialize(api_token:, logger: Logger.new(STDOUT), cache_time: nil, host: 'http://localhost:2300')
       @api_token = api_token
       @logger = logger
       @host = host
@@ -25,16 +23,18 @@ module Safelylaunch
     end
 
     def get(key)
-      cached_data = @cache.get(key)
-      
-      if cached_data
-        cached_data
-      else
-        response = connection.get('/api/v1/check', token: api_token, key: key)
-        result = response.body
-        @cache.put(key, result, cache_time)
-        result
-      end
+      cache_time ? cached_check_toggle(key) : check_toggle(key)
+    end
+
+  private
+
+    def cached_check_toggle(key)
+      @cache.get(key) || @cache.put(key, check_toggle(key), cache_time)
+    end
+
+    def check_toggle(key)
+      response = connection.get('/api/v1/check', token: api_token, key: key)
+      response.body
     end
   end
 end

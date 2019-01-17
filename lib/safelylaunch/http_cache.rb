@@ -10,6 +10,7 @@ module Safelylaunch
 
     def put(key, payload, expired_in)
       @hash.put_if_absent(key, Value.new(Time.new.to_i + expired_in, payload))
+      payload
     end
 
     def get(key)
