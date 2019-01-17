@@ -6,20 +6,17 @@ module Safelylaunch
   class HttpConnection
     attr_reader :api_token, :logger, :host, :connection, :cache_time
 
-    def initialize(api_token:, logger: Logger.new(STDOUT), cache_time: nil, host: 'http://localhost:2300')
+    DEFAILT_HOST = 'http://localhost:2300'
+
+    def initialize(api_token:, **params)
       @api_token = api_token
-      @logger = logger
-      @host = host
-      @cache_time = cache_time
+
+      @logger = params[:logger] || Logger.new(STDOUT)
+      @host = params[:host] || DEFAILT_HOST
+      @cache_time = params[:cache_time]
 
       @cache = HttpCache.new
-
-      @connection = Faraday.new(url: host, request: { timeout: 10 }) do |conn|
-        conn.response :json, content_type: %r{application/json}, parser_options: { symbolize_names: true }
-        conn.response :logger, logger
-
-        conn.adapter  Faraday.default_adapter
-      end
+      @connection = create_connection(host, logger)
     end
 
     def get(key)
@@ -35,6 +32,15 @@ module Safelylaunch
     def check_toggle(key)
       response = connection.get('/api/v1/check', token: api_token, key: key)
       response.body
+    end
+
+    def create_connection(host, logger)
+      Faraday.new(url: host, request: { timeout: 10 }) do |conn|
+        conn.response :json, content_type: %r{application/json}, parser_options: { symbolize_names: true }
+        conn.response :logger, logger
+
+        conn.adapter  Faraday.default_adapter
+      end
     end
   end
 end
