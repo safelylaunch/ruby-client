@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Safelylaunch::MockConnection do
   let(:conn) { described_class.new(api_token: api_token, toggles: toggles) }
   let(:api_token) { '123' }
@@ -5,7 +7,7 @@ RSpec.describe Safelylaunch::MockConnection do
   let(:toggles) do
     {
       'toggle-key' => true,
-      'disable-toggle-key' => false,
+      'disable-toggle-key' => false
     }
   end
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Safelylaunch
   class Client
     attr_reader :connection, :faraday_connection

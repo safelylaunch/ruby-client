@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Safelylaunch
   class MockConnection
     attr_reader :api_token, :logger, :host

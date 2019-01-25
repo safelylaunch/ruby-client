@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'logger'
 require 'faraday'
 require 'faraday_middleware'
@@ -23,7 +25,7 @@ module Safelylaunch
       cache_time ? cached_check_toggle(key) : check_toggle(key)
     end
 
-  private
+    private
 
     def cached_check_toggle(key)
       @cache.get(key) || @cache.put(key, check_toggle(key), cache_time)

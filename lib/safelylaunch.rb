@@ -1,4 +1,6 @@
-require "safelylaunch/version"
+# frozen_string_literal: true
+
+require 'safelylaunch/version'
 require 'safelylaunch/http_connection'
 require 'safelylaunch/mock_connection'
 require 'safelylaunch/client'

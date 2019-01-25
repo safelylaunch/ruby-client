@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Safelylaunch::HttpCache do
   let(:cache) { described_class.new }
 

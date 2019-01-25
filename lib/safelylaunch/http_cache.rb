@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'concurrent/map'
 
 module Safelylaunch
@@ -17,7 +19,7 @@ module Safelylaunch
       value = @hash[key]
 
       if value && (Time.new.to_i < value.expired_time)
-        value.data 
+        value.data
       else
         @hash.delete(key)
         nil

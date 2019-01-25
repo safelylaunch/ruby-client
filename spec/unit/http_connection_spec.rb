@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'logger'
 
 RSpec.describe Safelylaunch::HttpConnection do
@@ -11,7 +13,7 @@ RSpec.describe Safelylaunch::HttpConnection do
     context 'when toggle exist', vcr: { cassette_name: 'toggle-exist' } do
       subject { conn.get('stream-toggle') }
 
-      it { expect(subject).to eq(key: "stream-toggle", enable: true) }
+      it { expect(subject).to eq(key: 'stream-toggle', enable: true) }
       it { expect(subject[:error]).to eq(nil) }
 
       context 'and cache secconds time setuped' do

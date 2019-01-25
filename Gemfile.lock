@@ -11,6 +11,7 @@ GEM
   specs:
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
+    ast (2.4.0)
     concurrent-ruby (1.1.4)
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
@@ -20,8 +21,14 @@ GEM
     faraday_middleware (0.12.2)
       faraday (>= 0.7.4, < 1.0)
     hashdiff (0.3.8)
+    jaro_winkler (1.5.2)
     multipart-post (2.0.0)
+    parallel (1.13.0)
+    parser (2.6.0.0)
+      ast (~> 2.4.0)
+    powerpack (0.1.2)
     public_suffix (3.0.3)
+    rainbow (3.0.0)
     rake (10.5.0)
     rspec (3.8.0)
       rspec-core (~> 3.8.0)
@@ -36,7 +43,17 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.8.0)
     rspec-support (3.8.0)
+    rubocop (0.63.1)
+      jaro_winkler (~> 1.5.1)
+      parallel (~> 1.10)
+      parser (>= 2.5, != 2.5.1.1)
+      powerpack (~> 0.1)
+      rainbow (>= 2.2.2, < 4.0)
+      ruby-progressbar (~> 1.7)
+      unicode-display_width (~> 1.4.0)
+    ruby-progressbar (1.10.0)
     safe_yaml (1.0.4)
+    unicode-display_width (1.4.1)
     vcr (4.0.0)
     webmock (3.5.1)
       addressable (>= 2.3.6)
@@ -50,6 +67,7 @@ DEPENDENCIES
   bundler (~> 1.16)
   rake (~> 10.0)
   rspec (~> 3.0)
+  rubocop
   safelylaunch!
   vcr
   webmock

@@ -1,31 +1,32 @@
+# frozen_string_literal: true
 
-lib = File.expand_path("../lib", __FILE__)
+lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "safelylaunch/version"
+require 'safelylaunch/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "safelylaunch"
+  spec.name          = 'safelylaunch'
   spec.version       = Safelylaunch::VERSION
-  spec.authors       = ["Anton Davydov"]
-  spec.email         = ["antondavydov.o@gmail.com"]
+  spec.authors       = ['Anton Davydov']
+  spec.email         = ['antondavydov.o@gmail.com']
 
-  spec.summary       = %q{Ruby client for safelylaunch project}
-  spec.description   = %q{Ruby client for safelylaunch project}
-  spec.homepage      = "https://github.com/safelylaunch/ruby-client"
-  spec.license       = "MIT"
+  spec.summary       = 'Ruby client for safelylaunch project'
+  spec.description   = 'Ruby client for safelylaunch project'
+  spec.homepage      = 'https://github.com/safelylaunch/ruby-client'
+  spec.license       = 'MIT'
 
   spec.files         = `git ls-files -z`.split("\x0").reject do |f|
     f.match(%r{^(test|spec|features)/})
   end
-  spec.bindir        = "exe"
+  spec.bindir        = 'exe'
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
-  spec.require_paths = ["lib"]
+  spec.require_paths = ['lib']
 
-  spec.add_dependency "faraday"
-  spec.add_dependency "faraday_middleware"
-  spec.add_dependency "concurrent-ruby"
+  spec.add_dependency 'concurrent-ruby'
+  spec.add_dependency 'faraday'
+  spec.add_dependency 'faraday_middleware'
 
-  spec.add_development_dependency "bundler", "~> 1.16"
-  spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency "rspec", "~> 3.0"
+  spec.add_development_dependency 'bundler', '~> 1.16'
+  spec.add_development_dependency 'rake', '~> 10.0'
+  spec.add_development_dependency 'rspec', '~> 3.0'
 end
